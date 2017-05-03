@@ -1,5 +1,5 @@
 ---
-title: "Shortlisted Project Ideas"
+title: "Short-Listed Project Ideas"
 author: "Winnie Han"
 date: "3 May 2017"
 output: html_document
