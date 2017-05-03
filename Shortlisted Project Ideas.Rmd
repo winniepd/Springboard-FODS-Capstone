@@ -1,0 +1,45 @@
+---
+title: "Shortlisted Project Ideas"
+author: "Winnie Han"
+date: "3 May 2017"
+output: html_document
+---
+
+
+## IDEA # 01: Revolutionize The Beautiful Game!
+
+Although European football is `the beautiful game` with a global following, the recruiting, in-game officiating and decision-makings on and off the pitch still need to evolve a long way from its old-traditioned methods, and rely more on the aid of data and technology.
+
+**Data Source:** [Football Events](https://www.kaggle.com/secareanualin/football-events)
+
+```
+Example Questions:
+ # Do referees tend to favor the home team - ultimately calling for more unbiased technology aid?
+ # How do substitutions impact the game - flow of attack / defense, additional goals, etc.?
+```
+
+
+## IDEA # 02: Years Lost, But Not Forgotten!
+
+More than `17,610 years` wasted collectively among `2,021 exonerees`! Time to learn from these past examples and aid our justice system to better differentiate the innocent from the guilty.
+
+**Data Source:** [The National Registry of Exonerations](http://www.law.umich.edu/special/exoneration/Pages/detaillist.aspx)
+
+```
+Example Questions:
+ # What are the most common reasons behind a wrongful conviction?
+ # Do factors such as age, race, etc. have an impact on the wrongful conviction, and eventual exoneration?
+```
+
+
+## IDEA # 03: SF Biz Localization!
+
+Registering a new business in a beautiful San Francisco location - `Build it and they will come!`, or a more targeted approach based on data?
+
+**Data Source:** [Registered Business Locations in San Francisco](https://data.sfgov.org/Economy-and-Community/Registered-Business-Locations-San-Francisco/g8m3-pdis)
+
+```
+Example Questions:
+ # Does the closure of a business have any relation to the location and/or the industry it is in?
+ # Identify business industries by location - to aid with location scouting for new business openings? 
+```
