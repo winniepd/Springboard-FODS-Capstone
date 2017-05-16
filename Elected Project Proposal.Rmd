@@ -1,0 +1,109 @@
+---
+title: "Elected Project Proposal"
+author: "Winnie Han"
+date: "15 May 2017"
+output: html_document
+---
+
+
+## OPERATION: Revolutionize The Beautiful Game!
+Although European football is `the beautiful game` with a global following, the recruiting, in-game officiating and decision-makings on and off the pitch still need to evolve a long way from its old-traditioned methods, and rely more on the aid of data and technology.
+
+
+### THE PROBLEM
+Any football fan would agree with the notion that a bad refereeing decision can have a negative impact on the outcome of a game and even turn controversial if it happens during an important game.
+
+Although multitudes of videos and images of the full game (including pre-game and post-game footages) are captured from varying angles to make live broadcasting more entertaining, it is nowhere close to that extent when it comes to using the same data and technology to assist with in-game match officiating.
+
+Especially in English Premier League, football managers, players and fans alike, get vocal about match officiating biases and bad refereeing decisions post-game, but not enough to prompt any corrective action from the Football Association and authorities. 
+
+Not all biases and bad decisions are made consciously though, as sometimes they could have been made unconciously due to peer pressure, home crowd pressure, background history of the player, club, etc. - as the match officials are humans after all!
+
+This project aims to explore and provide scientific proof on a certain bias or pattern of bad decisions from match officials towards home teams or certain players / teams in certain leagues.
+
+The ultimate goal (no pun intended!) of this project is to push towards increased usage of instant in-game technology for major officiating decisions - following in the footsteps of other international sports such as tennis and cricket.
+
+
+### THE CLIENT
+Targeted clients are national and international football associations and authorities globally, as better match officiating and refereeing will lead to better quality, more entertaining and less controversial games, leading to increased and more global fanbase and following.
+
+Football clubs, managers, players and fans can also be the potential target audience as understanding of this pattern will get them on board with advocating for increased usage of technology to optimize the beautiful game they love.
+
+
+### THE DATA
+###### Data Source: [Football Events](https://www.kaggle.com/secareanualin/football-events)
+```
+Variables of Interest: ginf.csv
+
+FIELD_NAME        FIELD_DESCRIPTION
+id_odsp           Unique identifier of the game (link to events.csv)
+link_odsp
+adv_stats
+date              Date the game was played on
+league            League the game was played for
+                  [5 Leagues: E0, F1, G1, I1, S1]
+season            Season (ending year) the game was played for 
+                  [5 Seasons: 2012, 2013, 2014, 2015, 2016] 
+country           Country of the league the game was played for 
+                  [5 Countries: england, france, germany, italy, spain]
+ht                Name of the home team (whose ground the game is played at)
+at                Name of the away team (the traveling team)
+fthg              Total goals for the home team (conceded by the away team) at full time
+ftag              Total goals for the away team (conceded by the home team) at full time
+odd_h*
+odd_d*
+odd_a*
+odd_over*
+odd_under*
+odd_bts*
+odd_bts_n*
+```
+*These `betting odd` related fields will not be utilized as this project will steer away from the usual commercial aspect of the sport and will instead focus on the optimization of the game itself. 
+
+```
+Variables of Interest: events.csv
+
+FIELD_NAME        FIELD_DESCRIPTION
+id_odsp           Unique identifier of the game (link to ginf.csv)
+id_event          Unique identifier of the event
+sort_order        Numerical order in which the event occurred (1-180)
+time              Minute of the game when the event occurred (0-100)
+text              Free form text commentary
+event_type        Primary event code (0-11) (e.g. 1 = Attempt, 6 = Red Card)
+event_type2       Secondary event code (12-15) (e.g. 12 = Key Pass, 15 = Own Goal)
+side              Flag identifying if the event was triggered by the home team (1) or the away team (2) 
+event_team        Name of the team who triggered the event
+opponent          Name of the other team (who did not trigger the event)
+player            Name of the primary player who triggered the event or was involved in the event
+player2           Name of the secondary player who triggered the event or was involved in the event
+player_in         Name of the player coming ON for substitution (only applicable IF event_type IS Substitution)
+player_out        Name of the player coming OFF for substitution (only applicable IF event_type IS Substitution)
+shot_place**      Placement of the shot in relation to the goal (1-13) (e.g. 10 = Too High, 12 = Top Left Corner)
+shot_outcome**    Outcome of the shot (1-4) (e.g. 1 = On Target, 3 = Blocked)
+is_goal**         Flag identifying if the event resulted in a goal (1) or not (0)
+location          Location on the pitch where the event occurred (1-19) (e.g. 4 = Left Wing, 14 = Penalty Spot)
+bodypart**        Part of the body used to trigger the event (1-3) (e.g. 1 = Right Foot, 3 = Head)
+assist_method**   Method of assistance used to trigger the event (0-4) (e.g. 2 = Cross, 4 = Through Ball)
+situation**       Situation leading to the event (1-4) (e.g. 1 = Open Play, 3 = Corner)
+fast_break**      Flag identifying if the event qualifies as a fast break (counter-attack) (1) or not (0)
+
+**Only applicable IF event_type IS Attempt
+```
+
+
+### THE APPROACH
+
+- Exclude any outliers such as extra time football (outside 90 minutes).
+- Classify events that may or may not be triggered by refereeing decisions.
+- Categorize any subsequent events into related or unrelated events, and if related, whether it is a positive or negative impact.
+- Draw comparisons between different leagues and different seasons.
+- Pick a dummy team for a closer look and more detailed analysis.
+
+`Pleate Note:` This is just a very basic conceptual approach as it is still the initial phase of the project. As the project progresses and more knowledge is acquired through the curriculum, a more detailed technical approach will also be added.
+
+
+### THE DELIVERABLE
+```
+Must Have         Code (R) + Slide Deck & Presentation
+Nice To Have      Data Story + Mapping & Visualization
+```
