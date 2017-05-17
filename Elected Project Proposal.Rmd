@@ -99,7 +99,7 @@ fast_break**      Flag identifying if the event qualifies as a fast break (count
 - Draw comparisons between different leagues and different seasons.
 - Pick a dummy team for a closer look and more detailed analysis.
 
-`Pleate Note:` This is just a very basic conceptual approach as it is still the initial phase of the project. As the project progresses and more knowledge is acquired through the curriculum, a more detailed technical approach will also be added.
+`Please Note:` This is just a very basic conceptual approach as it is still the initial phase of the project. As the project progresses and more knowledge is acquired through the curriculum, a more detailed technical approach will also be added.
 
 
 ### THE DELIVERABLE
