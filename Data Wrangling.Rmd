@@ -1,0 +1,120 @@
+---
+title: "Capstone Project: Data Wrangling Steps"
+author: "Winnie Han"
+date: "16 August 2017"
+output: html_document
+---
+
+###### Data Source: [Football Events](https://www.kaggle.com/secareanualin/football-events)
+```
+Variables of Interest: ginf.csv
+
+FIELD_NAME        FIELD_DESCRIPTION
+id_odsp           Unique identifier of the game (link to events.csv)
+link_odsp
+adv_stats
+date              Date the game was played on
+league            League the game was played for
+                  [5 Leagues: E0, F1, G1, I1, S1]
+season            Season (ending year) the game was played for 
+                  [5 Seasons: 2012, 2013, 2014, 2015, 2016] 
+country           Country of the league the game was played for 
+                  [5 Countries: england, france, germany, italy, spain]
+ht                Name of the home team (whose ground the game is played at)
+at                Name of the away team (the traveling team)
+fthg              Total goals for the home team (conceded by the away team) at full time
+ftag              Total goals for the away team (conceded by the home team) at full time
+odd_h
+odd_d
+odd_a
+odd_over
+odd_under
+odd_bts
+odd_bts_n
+```
+
+```
+Variables of Interest: events.csv
+
+FIELD_NAME        FIELD_DESCRIPTION
+id_odsp           Unique identifier of the game (link to ginf.csv)
+id_event          Unique identifier of the event
+sort_order        Numerical order in which the event occurred (1-180)
+time              Minute of the game when the event occurred (0-100)
+text              Free form text commentary
+event_type        Primary event code (0-11) (e.g. 1 = Attempt, 6 = Red Card)
+event_type2       Secondary event code (12-15) (e.g. 12 = Key Pass, 15 = Own Goal)
+side              Flag identifying if the event was triggered by the home team (1) or the away team (2) 
+event_team        Name of the team who triggered the event
+opponent          Name of the other team (who did not trigger the event)
+player            Name of the primary player who triggered the event or was involved in the event
+player2           Name of the secondary player who triggered the event or was involved in the event
+player_in         Name of the player coming ON for substitution (only applicable IF event_type IS Substitution)
+player_out        Name of the player coming OFF for substitution (only applicable IF event_type IS Substitution)
+shot_place**      Placement of the shot in relation to the goal (1-13) (e.g. 10 = Too High, 12 = Top Left Corner)
+shot_outcome**    Outcome of the shot (1-4) (e.g. 1 = On Target, 3 = Blocked)
+is_goal**         Flag identifying if the event resulted in a goal (1) or not (0)
+location          Location on the pitch where the event occurred (1-19) (e.g. 4 = Left Wing, 14 = Penalty Spot)
+bodypart**        Part of the body used to trigger the event (1-3) (e.g. 1 = Right Foot, 3 = Head)
+assist_method**   Method of assistance used to trigger the event (0-4) (e.g. 2 = Cross, 4 = Through Ball)
+situation**       Situation leading to the event (1-4) (e.g. 1 = Open Play, 3 = Corner)
+fast_break**      Flag identifying if the event qualifies as a fast break (counter-attack) (1) or not (0)
+
+**Only applicable IF event_type IS Attempt
+```
+
+```
+1. JOIN
+```
+The data source consists of 2 main files **ginf.csv** (master information for each match) and **events.csv** (event details for each match) - having a 1:N relationship:
+
+File Name       | Details 
+--------------- | ------------------------------------------------------------------------------------------------------
+ginf.csv        | 10,112 observations of 18 variables.
+events.csv      | 941,009 observations of 22 variables.
+
+The very first step taken was to merge them into a single data frame - using **left_join** on the key **id_odsp**:
+The resultant data frame **ginf_events** has **941,009 observations of 39 variables**.
+
+
+```
+2. FILTER
+```
+Excluded incomplete and/or irrelevant observations / variables that can potentially affect the data analysis:
+
+Variable Name   | Details 
+--------------- | ------------------------------------------------------------------------------------------------------
+adv_stats       | Removed observations where this is **FALSE** as it means there are no events available for this match.
+season          | Removed observations related to **2017** season as the data is not captured for the entire season.
+time            | Removed observations related to more than **90** minutes - regarding those extra times as outliers.
+link_odsp       | Removed this variable entirely as it will not be utilized for this project.
+odd_over        | Removed this variable entirely as it will not be utilized for this project.
+odd_under       | Removed this variable entirely as it will not be utilized for this project.
+odd_bts         | Removed this variable entirely as it will not be utilized for this project.
+odd_bts_n       | Removed this variable entirely as it will not be utilized for this project.
+
+
+```
+3. MISSING VALUES
+```
+
+Replaced empty values with **NA** and **binarize** variables with missing values as they cannot be defaulted or replaced with a value: 
+
+Variable Name   | Details 
+--------------- | ------------------------------------------------------------------------------------------------------
+player          | Replace empty values with **NA**. Added a binary column **has_player** *(0 = NA, 1 = not NA)*.
+player2         | Replace empty values with **NA**. Added a binary column **has_player2** *(0 = NA, 1 = not NA)*.
+location        | Replace empty values with **19** *(19 = Not recorded, as per the data dictionary)*. Added a binary column **has_location** *(0 = NA, 1 = not NA)*.
+event_type_2    | Added a binary column **has_event_type_2** *(0 = NA, 1 = not NA)*.
+player_in       | Added a binary column **has_player_in** *(0 = NA, 1 = not NA)*.
+player_out      | Added a binary column **has_player_out** *(0 = NA, 1 = not NA)*.
+shot_place      | Added a binary column **has_shot_place** *(0 = NA, 1 = not NA)*.
+shot_outcome    | Added a binary column **has_shot_outcome** *(0 = NA, 1 = not NA)*.
+bodypart        | Added a binary column **has_bodypart** *(0 = NA, 1 = not NA)*.
+situation       | Added a binary column **has_situation** *(0 = NA, 1 = not NA)*.
+
+
+```
+4. CLEAN DATA
+```
+Write the cleaned data frame into a new **ginf_events.csv** data file - which has **838,866 observations of 44 variables**.
